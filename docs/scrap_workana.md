@@ -10,8 +10,8 @@ De cada trabalho é preciso coletar:
 - [x] Data
 - [x] Budget
 - [x] Links
-- [ ] Categorias
-- [ ] Subcategoria
+- [x] Categorias
+- [x] Subcategoria
 
 ## 🛠️ Tools
 - bash
