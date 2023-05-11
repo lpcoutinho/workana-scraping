@@ -29,11 +29,11 @@ De cada trabalho é preciso coletar:
 > [Leia a Documentação do Selenium](https://www.selenium.dev/documentation/)
 
 Neste texto mostrarei como fiz para coletar os dados de trabalhos ofertados na plataforma Workana. Para verificar o caminho até este ponto do projeto consulte: 
-    - [Scrap one job](../notebooks/scrap_workana_one_job.ipynb) 
-    - [Scrap one page](../notebooks/scrap_workana_one_page.ipynb)
+- [Scrap one job](../notebooks/scrap_workana_one_job.ipynb) 
+- [Scrap one page](../notebooks/scrap_workana_one_page.ipynb)
 
 Enquanto o notebook base para este texto é: 
-    - [Scrap all jobs](../notebooks/scrap_workana_all_jobs.ipynb)
+- [Scrap all jobs](../notebooks/scrap_workana_all_jobs.ipynb)
 
 ## Instalação
 Antes de começar, é preciso instalar os pacotes que fazem o projeto funcionar. Você pode fazer isso usando o gerenciador de pacotes pip ou poetry:
