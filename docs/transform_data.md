@@ -127,7 +127,7 @@ df['Publish Date']
 print(df.info())
 ```
 ## Criando colunas de Categoria e Subcategoria
-Nas linhas da coluna Summary podemos encontrar Categoria e Subcategoria, além de outras informações úteis. Não conseguimos capturar estes dados usando Selenium pela forma como eles estão dispostos no HTML, não são elementos como <a>, <strong>, etc.
+Nas linhas da coluna Summary podemos encontrar Categoria e Subcategoria, além de outras informações úteis. Não conseguimos capturar estes dados usando Selenium pela forma como eles estão dispostos no HTML, não são elementos como `<a>`, `<strong>`, etc.
 
 A biblioteca BeautifulSoup também não ajuda aqui porque seu retorno é vazio ao tentar capturar os dados. Desta forma precisamos manualmente extrair as informações que desejamos.
 
