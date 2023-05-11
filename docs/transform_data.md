@@ -179,18 +179,6 @@ if '+' in df.columns:
     df.drop('+', axis=1, inplace=True)
 ```
 
-Em algumas linhas da coluna ***Summary*** aparece a expressão ***... Ver mais detalhes*** que no site é usada para exibir mais informações sobre o trabalho. Aqui iremos remover todo o texto após esta expressão pois queremos exibir apenas um resumo do trabalho proposto.
-
-```python
-# looping through all rows of 'Summary'
-for i in range(len(df['Summary'])):
-    # search for substring '...'
-    index = df.loc[i, 'Summary'].find('...')
-    if index != -1:
-        # remove all after substring
-        df.loc[i, 'Summary'] = df.loc[i, 'Summary'][:index]
-```
-
 ## Exportando dados para arquivo .CSV
 Agora temos o dataframe organizado, pronto para ser consultado e produzir análises. Vamos exportar os dados.
 
