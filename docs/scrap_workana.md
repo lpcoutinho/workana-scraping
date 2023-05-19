@@ -148,10 +148,20 @@ print('Propostas:',job_bids)
 ```
 
 #### Resumo
+Algumas publicações possuem um link que expande as informações exibidas na tela e para podermos capturar as informações de categoria e subcategoria no futuro necessitamos extrair todo o texto contido no resumo.
 ```python
-job_desc = driver.find_element(By.XPATH, f'//*[@id="projects"]/div[{2}]/div[2]/div[2]/div')
-job_desc = job_desc.text 
-print(job_desc)
+if see_more.is_displayed():
+    try:
+        see_more.click()
+
+        job_desc = driver.find_element(By.XPATH,f'//*[@id="projects"]/div[{i}]/div[2]/div[2]/div')
+        job_desc_more = driver.find_element(By.XPATH,f'//*[@id="projects"]/div[{i}]/div[2]/div[2]/div/span[2]')
+        job_desc = job_desc.text + job_desc_more.text
+    except:
+        print(f"error 'see more' in p:{p} i:{i}")
+else:
+    job_desc = driver.find_element(By.XPATH,f'//*[@id="projects"]/div[{i}]/div[2]/div[2]/div')
+    job_desc = job_desc.text
 ```
 
 #### Skills
@@ -185,21 +195,46 @@ Usaremos Pandas para transformar as informações extraidos do Workana em um dat
 
 > [Leia a documentação do Pandas](https://pandas.pydata.org/docs/)
 
-### Transformando os dados em lista
+### Transformando os dados para caber em um dataframe
+Criei um dicionário que recebe os valores extraidos da plataforma e acrescentei a chave 'Update' com valor 'False' para poder testar a atualização dos dados.
 ```python
 data_temp = {'Job': job_title,'Publish Date': job_date, 'Skills': job_sk,  'Budget':job_budget, 
-                'Bids': job_bids, 'Summary': job_desc, 'Link': job_link}
-
-data =[]
-data.append(data_temp)
+                'Bids': job_bids, 'Summary': job_desc, 'Link': job_link, "Updated": False,}
 ```
 
-# Criando e visualizando um dataframe
+### Criando um dataframe e exportando os dados para um CSV
+Nosso script roda em loop infinito, para que os dados não sejam inseridos repetidas vezes em nosso arquivo CSV criei uma verificação pelo link. Caso o link não exista no arquivo CSV os dados serão inseridos diretamente no arquivo. Entretanto, se o link já estiver presente as outras informações serão atualizadas assim como a colua 'Update' que agora passa a valer 'True'.
 ```python
-df =pd.DataFrame(data)
-df.head()
+# #CSV path
+csv_path = "workana_scraping/data/data_raw.csv"
+
+# CSV exists
+file_exists = False
+
+if os.path.exists(csv_path):
+    file_exists = True
+
+    # link is in CSV
+    link_exists = False
+
+    if file_exists:
+        df = pd.read_csv(csv_path)
+        if df["Link"].eq(data_tmp["Link"]).any():
+            link_exists = True
+            # update row
+            df.loc[df["Link"] == data_tmp["Link"],["Job","Publish Date","Skills","Budget","Bids","Summary","Updated"]] = [data_tmp["Job"],data_tmp["Publish Date"],data_tmp["Skills"],data_tmp["Budget"],data_tmp["Bids"],data_tmp["Summary"],True]
+
+            # save update
+            df.to_csv(csv_path, index=False)
+
+    # append newline if file does not exist or if link is not present in CSV
+    if not file_exists or not link_exists:
+        df_nova_linha = pd.DataFrame([data_tmp])
+        df_nova_linha.to_csv(csv_path, mode="a", index=False, header=not file_exists)
 ```
 
 ## Conclusão
-Neste ponto já é possível ter acesso as primeiras informações coletadas do Workana em um dataframe. Agora é preciso tratar estes dados para que seja possível utilizá-los em algorítimos estatísticos.
+Neste ponto já é possível ter acesso as primeiras informações coletadas do Workana em um dataframe. Após esta etapa realizo alguns filtros para que a cada loop realizado algumas informações sejam enviadas ao bot do telegram. [Verifique a construção do bot](bot_telegram.md)
+
+Com todas as etapas concluidas é preciso tratar os dados para que seja possível utilizá-los em algorítimos estatísticos.
 [Continue para a sessão de tratamento de dados](transform_data.md).

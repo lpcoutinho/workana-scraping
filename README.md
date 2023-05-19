@@ -4,9 +4,9 @@
 - Permitir fácil visualização e filtro dos dados
 - Disponibilizar online as informações e análises tratadas
 
-O projeto é desenvolvido em diversas etapas e para facilitar sua compreensão cada etapa está documentada e disponibilizada nesta estrutura.
+O projeto é desenvolvido em diversas etapas e para facilitar sua compreensão cada uma das etapas está documentada e disponibilizada nesta estrutura.
 
-A primeira atividade consiste em raspar os dados da plataforma Workana de modo que possa criar um DataSet para futuras análises.
+A primeira atividade consiste em raspar os dados da plataforma Workana de modo que seja possível criar um DataSet para futuras análises.
 
 Em [Road Map](#road-map) você pode verificar cada etapa e consultar sua documentação.
 
@@ -17,9 +17,9 @@ Em ***docs/*** estão os documentos textuais desenvolvidos ao longo da atividade
 
 No diretório ***notebooks/*** ficarão disponíveis os arquivos ***jupyter*** que foram utilizados ao longo das atividades.
 
-Os scripts e arquivos ***\*.py*** estarão no diretório ***workana_scrapp/***.
+Os scripts e arquivos ***\*.py*** estarão no diretório ***workana_scraping/***.
 
-Enquanto os dados armazenados poderão ser acessados no diretório ***workana_scrapp/data***.
+Enquanto os dados armazenados poderão ser acessados no diretório ***workana_scraping/data***.
 
 ## Road Map
 ### Fase 1
@@ -31,20 +31,61 @@ Enquanto os dados armazenados poderão ser acessados no diretório ***workana_sc
     - [Tratando as informações coletados](/docs/transform_data.md)
 
 ### Fase 2
-- [ ] Telegram bot
+- [x] Telegram bot
 - [ ] Minerar dados 
 - [ ] Visualizar
 - [ ] Disponibilizar
 
 ## To Do
 -   [x] Makefile para formatar códigos
--   [ ] Pré-commit para formatar
+-   [x] Pré-commit para formatar
 -   [ ] Container Docker
 -   [ ] Armazenar em PostgreSQL
--   [ ] Automatizar ezecução com Cron
+-   [ ] Automatizar execução com Cron
 -   [ ] Atualizar CSV com os dados extraidos
     -   [ ] Concatenar novos dados
     -   [ ] Atualizar coluna Bids  
+
+## Execute o projeto
+
+### Instale os requerimentos
+Você pode fazer isso usando o gerenciador de pacotes pip ou poetry:
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+poetry install
+```
+### Configure as variáveis de ambiente
+Crie o arquivo ***.env*** na raíz do projeto e popule com as credenciais do seu bot.
+
+```bash
+BOT_TOKEN = xxxxxx
+CHAT_ID = xxxxxx
+TI_TOP = xxxxxx
+DSGN_TOP = xxxxxx
+MKT_TOP = xxxxxx
+ENG_TOP = xxxxxx
+CTD_TOP = xxxxxx
+JD_TOP = xxxxxx
+ADM_TOP = xxxxxx
+```
+
+### Execute o scrapper
+Este script realiza a raspagem de dados dos trabalhos disponíveis no workana e os envia para um grupo no Telegram.
+
+```bash
+python workana_scraping/scrapper.py
+```
+
+### Execute o bot
+Está disponível um bot para conversas individuais que retorna trabalhos disponíveis nas ultimas 24 separados por categoria.
+
+```bash
+python workana_scraping/bot_telegram.py
+```
 
 ## Dúvidas
 
