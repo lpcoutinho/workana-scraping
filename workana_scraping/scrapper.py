@@ -8,9 +8,14 @@ from clear import Clear
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+
+# Configurar as opções do Chrome para executar em modo headless
+chrome_options = Options()
+chrome_options.add_argument("--headless")
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -45,7 +50,8 @@ class Scrapper:
     def workana():
         # init driver
         driver = webdriver.Chrome(
-            service=ChromeService(ChromeDriverManager().install())
+            service=ChromeService(ChromeDriverManager().install()),
+            options=chrome_options,
         )
 
         # maximizar a janela do navegador
