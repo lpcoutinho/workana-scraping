@@ -1,17 +1,20 @@
 # Workana Scraping Project
 ## O Problema
 - Consultar os trabalhos publicados no Workana periodicamente
-- Permitir fácil visualização e filtro dos dados
-- Disponibilizar online as informações e análises tratadas
+- Facilitar a seleção de trabalhos por links e categorias
+    - Bot telegram
+    - Arquivo CSV
+- Analizar dados de trabalhos publicados
+- Disponibilizar dados e análises
 
 O projeto é desenvolvido em diversas etapas e para facilitar sua compreensão cada uma das etapas está documentada e disponibilizada nesta estrutura.
 
-A primeira atividade consiste em raspar os dados da plataforma Workana de modo que seja possível criar um DataSet para futuras análises.
+A primeira atividade consiste em raspar os dados da plataforma Workana de modo que seja possível criar um DataSet para futuras análises e envios de mensagens.
 
 Em [Road Map](#road-map) você pode verificar cada etapa e consultar sua documentação.
 
 ## A estrutura
-O projeto for organizado para facilitar o acesso às informações e atividades desenvolvidas. Etapas e categorias de atividades estão dispostas em diretórios referentes a cada atividade.
+Para facilitar o acesso às informações e atividades desenvolvidas, etapas e categorias de atividades estão dispostas em diretórios referentes a cada atividade.
 
 Em ***docs/*** estão os documentos textuais desenvolvidos ao longo da atividade que explicam e justificam as metodologias utilizadas.
 
@@ -42,9 +45,9 @@ Enquanto os dados armazenados poderão ser acessados no diretório ***workana_sc
 -   [ ] Container Docker
 -   [ ] Armazenar em PostgreSQL
 -   [ ] Automatizar execução com Cron
--   [ ] Atualizar CSV com os dados extraidos
-    -   [ ] Concatenar novos dados
-    -   [ ] Atualizar coluna Bids  
+-   [x] Atualizar CSV com os dados extraidos
+    -   [x] Concatenar novos dados
+    -   [x] Atualizar coluna Bids  
 
 ## Execute o projeto
 
